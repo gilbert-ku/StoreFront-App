@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:storefront/pages/home_page.dart';
+import 'package:storefront/firebase_options.dart';
+import 'package:storefront/views/home/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensures binding is initialized
-  await Firebase.initializeApp(); // Initializes Firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  ); // Initializes Firebase
   runApp(const MyApp());
 }
 
@@ -29,31 +32,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// class MyHomePage extends StatelessWidget {
-//   const MyHomePage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Center(
-//           child: Text(
-//             "StoreFront App",
-//           ),
-//         ),
-//       ),
-//       body: Center(
-//         child: ElevatedButton(
-//           onPressed: () {
-//             FirebaseAnalytics.instance.logEvent(
-//               name: 'button_click',
-//               parameters: {'button_name': 'DemoButton'},
-//             );
-//           },
-//           child: const Text("Log Event"),
-//         ),
-//       ),
-//     );
-//   }
-// }

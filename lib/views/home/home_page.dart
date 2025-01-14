@@ -21,6 +21,22 @@ class _HomepageState extends State<Homepage> {
           ),
         ),
       ),
+      body: Center(
+        child: Container(
+          height: double.infinity,
+          color: Colors.pink[100],
+          child: const Center(
+            child: Text(
+              "Karibu StoreFront, your one stope Shop",
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                color: Colors.purple,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
