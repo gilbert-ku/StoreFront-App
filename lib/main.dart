@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:storefront/firebase_options.dart';
-import 'package:storefront/views/home/home_page.dart';
+import 'package:storefront/views/auth/login_screen.dart';
+// import 'package:storefront/views/home/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensures binding is initialized
@@ -19,16 +21,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.white,
+          brightness: Brightness.light,
+        ),
+        textTheme: TextTheme(
+          bodySmall: GoogleFonts.nunito(),
+          bodyMedium: GoogleFonts.nunito(),
+          bodyLarge: GoogleFonts.nunito(),
+        ),
       ),
+
       navigatorObservers: [
         FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
       ], // Add analytics observer
       // home: const MyHomePage(),
-      home: const Homepage()
+      // home: const Homepage()
+      home: const LoginScreen(),
     );
   }
 }

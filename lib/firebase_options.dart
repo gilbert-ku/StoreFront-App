@@ -64,6 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '744839813017',
     projectId: 'storefront-20f13',
     storageBucket: 'storefront-20f13.firebasestorage.app',
+    iosClientId: '744839813017-dfl88fjtprg1dgpvlbb72fq37i5esb5j.apps.googleusercontent.com',
     iosBundleId: 'com.example.storefront',
   );
 
@@ -73,6 +74,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '744839813017',
     projectId: 'storefront-20f13',
     storageBucket: 'storefront-20f13.firebasestorage.app',
+    iosClientId: '744839813017-dfl88fjtprg1dgpvlbb72fq37i5esb5j.apps.googleusercontent.com',
     iosBundleId: 'com.example.storefront',
   );
 
