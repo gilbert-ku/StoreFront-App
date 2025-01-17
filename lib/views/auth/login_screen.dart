@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:storefront/views/auth/widgets/google_auth.dart';
 import 'package:storefront/views/auth/widgets/login_form.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -43,6 +44,10 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
+
+          const GoogleAuth(),
+
+          const SizedBox( height: 10,),
 
           const LoginForm()
         ],
