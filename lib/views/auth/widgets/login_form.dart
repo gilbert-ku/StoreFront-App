@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -7,7 +8,30 @@ class LoginForm extends StatefulWidget {
   State<LoginForm> createState() => _LoginFormState();
 }
 
+// email validator
+extension EmailValidator on String {
+  bool isValidEmail() {
+    return RegExp(
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+        .hasMatch(this);
+  }
+}
+
+// validate password
+String? validatePassword(String value) {
+  // Regular expression for strong password validation
+  RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
+  if (value.isEmpty) {
+    return 'Please enter your password';
+  } else if (!regex.hasMatch(value)) {
+    return 'Password must be 8+ chars, incl. upper, lower, and a num.';
+  }
+  return null; // Validation successful
+}
+
 class _LoginFormState extends State<LoginForm> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -47,33 +71,60 @@ class _LoginFormState extends State<LoginForm> {
           height: 10,
         ),
         Form(
+          key: _formKey, // unique global key
+
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 17.0,
               vertical: 10,
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextFormField(
                   decoration: const InputDecoration(
                     labelText: "Enter Your Email",
+                    hintText: "jondoe@email.com",
+                    hintStyle: TextStyle(
+                      color: Colors.black26,
+                      fontSize: 12,
+                    ),
                     border: OutlineInputBorder(),
                     prefixIcon: Icon(
                       Icons.email,
                     ),
                   ),
+                  // Replace autovalidate with autovalidateMode
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (input) {
+                    // Safely check if input is not null and then validate
+                    if (input != null && input.isValidEmail()) {
+                      return null;
+                    }
+                    return "Please enter a valid email";
+                  },
                 ),
                 const SizedBox(
                   height: 17,
                 ),
+
                 TextFormField(
                   decoration: const InputDecoration(
                     labelText: "Enter Your Password",
+                    hintText: "Xhjskdh.1jw%",
+                    hintStyle: TextStyle(
+                      color: Colors.black26,
+                      fontSize: 12,
+                    ),
                     border: OutlineInputBorder(),
                     prefixIcon: Icon(
                       Icons.lock,
                     ),
                   ),
+                  obscureText: true, // Hides the text for password input
+                  validator: (value) {
+                    return validatePassword(value ?? '');
+                  },
                 ),
 
                 const SizedBox(
@@ -81,21 +132,27 @@ class _LoginFormState extends State<LoginForm> {
                 ),
 
                 // forgot password
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "Forgot Password?",
+                RichText(
+                  text: TextSpan(
+                    text: "Forgot Password?",
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.black54,
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline),
+                          color: Colors.pink,
+                          fontWeight: FontWeight.w500,
+                          decoration: TextDecoration.underline,
+                        ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        // Handle the tap event
+                        debugPrint("Forgot Password clicked");
+                      },
                   ),
                 ),
-
+                
                 const SizedBox(
                   height: 20,
                 ),
 
+                // button
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -114,14 +171,23 @@ class _LoginFormState extends State<LoginForm> {
                     ),
                   ),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        // If the form is valid, display a snackbar. In the real world,
+                        // you'd often call a server or save the information in a database.
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Processing Data')),
+                        );
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
-                      elevation: 0, // Removes shadow
+                      elevation: 0,
                       backgroundColor: Colors
                           .transparent, // Makes the button background transparent
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
-                            30), // Matches the container's border radius
+                          30,
+                        ),
                       ),
                     ),
                     child: Padding(
@@ -134,6 +200,36 @@ class _LoginFormState extends State<LoginForm> {
                             ),
                       ),
                     ),
+                  ),
+                ),
+
+                const SizedBox(
+                  height: 10,
+                ),
+
+                // const Text("Don't have an account?,", )
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "Don't have an account?",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w400,
+                            ),
+                      ),
+                      TextSpan(
+                        text: "  Register.",
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.w400,
+                              color: Colors.pink,
+                            ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            // Handle the tap event
+                            debugPrint("Register clicked");
+                          },
+                      ),
+                    ],
                   ),
                 )
               ],
