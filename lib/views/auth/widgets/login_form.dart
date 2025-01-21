@@ -32,6 +32,9 @@ String? validatePassword(String value) {
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
 
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -81,7 +84,10 @@ class _LoginFormState extends State<LoginForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // email field
                 TextFormField(
+                  controller: _emailController, // email controller
+
                   decoration: const InputDecoration(
                     labelText: "Enter Your Email",
                     hintText: "jondoe@email.com",
@@ -108,7 +114,10 @@ class _LoginFormState extends State<LoginForm> {
                   height: 17,
                 ),
 
+                //  password controller
                 TextFormField(
+                  controller: _passwordController, //password controller
+
                   decoration: const InputDecoration(
                     labelText: "Enter Your Password",
                     hintText: "Xhjskdh.1jw%",
@@ -147,7 +156,7 @@ class _LoginFormState extends State<LoginForm> {
                       },
                   ),
                 ),
-                
+
                 const SizedBox(
                   height: 20,
                 ),
@@ -179,7 +188,11 @@ class _LoginFormState extends State<LoginForm> {
                           const SnackBar(content: Text('Processing Data')),
                         );
                       }
+
+                      debugPrint(
+                          'Email: ${_emailController.text}, Password: ${_passwordController.text}');
                     },
+                    
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
                       backgroundColor: Colors
