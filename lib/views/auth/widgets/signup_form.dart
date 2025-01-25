@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter/gestures.dart';
+import 'package:storefront/services/email_auth_services.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
@@ -88,7 +89,7 @@ class _SignupFormState extends State<SignupForm> {
               children: [
                 // full field
                 TextFormField(
-                  controller: _nameController, // email controller
+                  controller: _nameController, // name controller
 
                   decoration: const InputDecoration(
                     labelText: "Enter Your Name",
@@ -220,15 +221,16 @@ class _SignupFormState extends State<SignupForm> {
                         );
                       }
 
-                      // final message = await EmailAuthServices().login(
-                      //   email: _emailController.text,
-                      //   password: _passwordController.text,
-                      // );
-                      // if (message!.contains("Success")) {
-                      //   debugPrint("login successful");
-                      // } else {
-                      //   debugPrint("error ");
-                      // }
+                      final message = await EmailAuthServices().registration(
+                        name: _nameController.text,
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      );
+                      if (message!.contains("Success")) {
+                        debugPrint("account created successful");
+                      } else {
+                        debugPrint("error ");
+                      }
                       // debugPrint(
                       //     'Email: ${_emailController.text}, Password: ${_passwordController.text}');
                     },
