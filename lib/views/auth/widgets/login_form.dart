@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/services.dart';
+import 'package:storefront/services/email_auth_services.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -120,7 +122,7 @@ class _LoginFormState extends State<LoginForm> {
 
                   decoration: const InputDecoration(
                     labelText: "Enter Your Password",
-                    hintText: "Xhjskdh.1jw%",
+                    hintText: "password",
                     hintStyle: TextStyle(
                       color: Colors.black26,
                       fontSize: 12,
@@ -180,7 +182,7 @@ class _LoginFormState extends State<LoginForm> {
                     ),
                   ),
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         // If the form is valid, display a snackbar. In the real world,
                         // you'd often call a server or save the information in a database.
@@ -189,10 +191,18 @@ class _LoginFormState extends State<LoginForm> {
                         );
                       }
 
-                      debugPrint(
-                          'Email: ${_emailController.text}, Password: ${_passwordController.text}');
+                      final message = await EmailAuthServices().login(
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      );
+                      if (message!.contains("Success")) {
+                        debugPrint("login successful");
+                      } else {
+                        debugPrint("error ");
+                      }
+                      // debugPrint(
+                      //     'Email: ${_emailController.text}, Password: ${_passwordController.text}');
                     },
-                    
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
                       backgroundColor: Colors

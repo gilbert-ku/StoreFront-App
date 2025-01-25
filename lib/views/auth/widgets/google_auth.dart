@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../services/auth_service.dart';
+import '../../../services/google_auth_service.dart';
 
 class GoogleAuth extends StatefulWidget {
   const GoogleAuth({super.key});
