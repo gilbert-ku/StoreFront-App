@@ -3,7 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:storefront/firebase_options.dart';
-import 'package:storefront/views/auth/login_screen.dart';
+// import 'package:storefront/views/auth/login_screen.dart';
+import 'package:storefront/views/auth/signup_screen.dart';
 // import 'package:storefront/views/home/home_page.dart';
 
 void main() async {
@@ -38,7 +39,8 @@ class MyApp extends StatelessWidget {
       ], // Add analytics observer
       // home: const MyHomePage(),
       // home: const Homepage()
-      home: const LoginScreen(),
+      // home: const LoginScreen(),
+      home:  const SignupScreen(),
     );
   }
 }
