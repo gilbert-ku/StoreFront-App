@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:storefront/views/auth/widgets/google_auth.dart';
+import 'package:storefront/views/auth/widgets/signup_form.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -40,10 +41,14 @@ class SignupScreen extends StatelessWidget {
             ),
           ),
 
+
+          const GoogleAuth(),
+
           const SizedBox(
             height: 10,
           ),
 
+          const SignupForm(),
         ],
       ),
     );

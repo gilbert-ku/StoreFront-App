@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'package:storefront/services/email_auth_services.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+import 'package:flutter/gestures.dart';
+
+class SignupForm extends StatefulWidget {
+  const SignupForm({super.key});
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<SignupForm> createState() => _SignupFormState();
 }
 
 // email validator
@@ -30,9 +30,10 @@ String? validatePassword(String value) {
   return null; // Validation successful
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _SignupFormState extends State<SignupForm> {
   final _formKey = GlobalKey<FormState>();
 
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -85,6 +86,35 @@ class _LoginFormState extends State<LoginForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // full field
+                TextFormField(
+                  controller: _nameController, // email controller
+
+                  decoration: const InputDecoration(
+                    labelText: "Enter Your Name",
+                    hintText: "John Doe",
+                    hintStyle: TextStyle(
+                      color: Colors.black26,
+                      fontSize: 12,
+                    ),
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(
+                      Icons.email,
+                    ),
+                  ),
+                  // Replace autovalidate with autovalidateMode
+                  validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Please enter your full name';
+                }
+                return null;
+              },
+                ),
+
+                const SizedBox(
+                  height: 17,
+                ),
+
                 // email field
                 TextFormField(
                   controller: _emailController, // email controller
@@ -190,15 +220,15 @@ class _LoginFormState extends State<LoginForm> {
                         );
                       }
 
-                      final message = await EmailAuthServices().login(
-                        email: _emailController.text,
-                        password: _passwordController.text,
-                      );
-                      if (message!.contains("Success")) {
-                        debugPrint("login successful");
-                      } else {
-                        debugPrint("error ");
-                      }
+                      // final message = await EmailAuthServices().login(
+                      //   email: _emailController.text,
+                      //   password: _passwordController.text,
+                      // );
+                      // if (message!.contains("Success")) {
+                      //   debugPrint("login successful");
+                      // } else {
+                      //   debugPrint("error ");
+                      // }
                       // debugPrint(
                       //     'Email: ${_emailController.text}, Password: ${_passwordController.text}');
                     },
