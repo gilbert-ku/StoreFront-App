@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+
+
 import 'package:storefront/services/email_auth_services.dart';
+import 'package:storefront/views/auth/signup_screen.dart';
+import 'package:storefront/views/home/home_page.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -183,8 +187,6 @@ class _LoginFormState extends State<LoginForm> {
                   child: ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        // If the form is valid, display a snackbar. In the real world,
-                        // you'd often call a server or save the information in a database.
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processing Data')),
                         );
@@ -194,14 +196,22 @@ class _LoginFormState extends State<LoginForm> {
                         email: _emailController.text,
                         password: _passwordController.text,
                       );
-                      if (message!.contains("Success")) {
-                        debugPrint("login successful");
+
+                      if (!mounted) return; // Ensure the widget is still in the tree
+
+                      if (message != null && message.contains("Success")) {
+                        
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => const Homepage(),
+                          ),
+                        );
                       } else {
-                        debugPrint("error ");
+                        debugPrint("Error occurred during login");
                       }
-                      // debugPrint(
-                      //     'Email: ${_emailController.text}, Password: ${_passwordController.text}');
+
                     },
+
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
                       backgroundColor: Colors
@@ -248,7 +258,12 @@ class _LoginFormState extends State<LoginForm> {
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             // Handle the tap event
-                            debugPrint("Register clicked");
+                            // debugPrint("Register clicked");
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const SignupScreen(),
+                              ),
+                            );
                           },
                       ),
                     ],

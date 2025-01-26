@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/gestures.dart';
 import 'package:storefront/services/email_auth_services.dart';
+import 'package:storefront/views/auth/login_screen.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
@@ -105,11 +106,11 @@ class _SignupFormState extends State<SignupForm> {
                   ),
                   // Replace autovalidate with autovalidateMode
                   validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Please enter your full name';
-                }
-                return null;
-              },
+                    if (text == null || text.isEmpty) {
+                      return 'Please enter your full name';
+                    }
+                    return null;
+                  },
                 ),
 
                 const SizedBox(
@@ -175,17 +176,36 @@ class _SignupFormState extends State<SignupForm> {
                 // forgot password
                 RichText(
                   text: TextSpan(
-                    text: "Forgot Password?",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.pink,
-                          fontWeight: FontWeight.w500,
-                          decoration: TextDecoration.underline,
-                        ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        // Handle the tap event
-                        debugPrint("Forgot Password clicked");
-                      },
+                    children: [
+                      TextSpan(
+                        text: "By Sign Up you agree to ",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w300,
+                            ),
+                      ),
+                      TextSpan(
+                        text: "Terms",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Colors.pink,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                            ),
+                      ),
+                      TextSpan(
+                        text: " and ",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w300,
+                            ),
+                      ),
+                      TextSpan(
+                        text: "Conditions",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Colors.pink,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                            ),
+                      )
+                    ],
                   ),
                 ),
 
@@ -266,13 +286,13 @@ class _SignupFormState extends State<SignupForm> {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: "Don't have an account?",
+                        text: "You have an account?",
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w400,
                             ),
                       ),
                       TextSpan(
-                        text: "  Register.",
+                        text: "  Sign In.",
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               fontWeight: FontWeight.w400,
                               color: Colors.pink,
@@ -280,7 +300,11 @@ class _SignupFormState extends State<SignupForm> {
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             // Handle the tap event
-                            debugPrint("Register clicked");
+                             Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const LoginScreen(),
+                              ),
+                            );
                           },
                       ),
                     ],

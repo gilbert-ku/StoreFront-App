@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:storefront/views/home/home_page.dart';
 import '../../../services/google_auth_service.dart';
 
 class GoogleAuth extends StatefulWidget {
@@ -26,8 +27,12 @@ class GoogleAuthState extends State<GoogleAuth> {
 
     if (userCredential != null) {
       // Sign-in successful, handle navigation or success actions
-      // For example: navigate to the home screen
-      // Navigator.pushReplacementNamed(context, '/home');
+      
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const Homepage(),
+        ),
+      );
     }
   }
 
