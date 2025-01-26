@@ -101,7 +101,7 @@ class _SignupFormState extends State<SignupForm> {
                     ),
                     border: OutlineInputBorder(),
                     prefixIcon: Icon(
-                      Icons.email,
+                      Icons.person,
                     ),
                   ),
                   // Replace autovalidate with autovalidateMode
