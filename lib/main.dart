@@ -3,8 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:storefront/firebase_options.dart';
-// import 'package:storefront/views/auth/login_screen.dart';
-import 'package:storefront/views/home/home_page.dart';
+import 'package:storefront/views/Navigation/bottom_navigation.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensures binding is initialized
@@ -36,9 +36,8 @@ class MyApp extends StatelessWidget {
       navigatorObservers: [
         FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
       ], // Add analytics observer
-      home: const Homepage()
-      // home: const LoginScreen(),
- 
+
+      home: const BottomNavigation(),
     );
   }
 }
