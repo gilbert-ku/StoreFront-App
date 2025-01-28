@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:storefront/firebase_options.dart';
 import 'package:storefront/views/Navigation/bottom_navigation.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensures binding is initialized
   await Firebase.initializeApp(
@@ -36,7 +35,6 @@ class MyApp extends StatelessWidget {
       navigatorObservers: [
         FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
       ], // Add analytics observer
-
       home: const BottomNavigation(),
     );
   }
