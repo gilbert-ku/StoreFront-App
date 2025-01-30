@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:storefront/views/home/widgets/category_section.dart';
 import 'package:storefront/views/home/widgets/hero_section.dart';
 
 class Homepage extends StatefulWidget {
@@ -56,6 +57,10 @@ class _HomepageState extends State<Homepage> {
             Column(
               children: [
                 HeroSection(),
+
+                SizedBox(height: 10,),
+
+                CategorySection(),            
               ],
             )
           ],
